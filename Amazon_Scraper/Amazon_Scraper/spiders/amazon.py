@@ -31,10 +31,10 @@ class AmazonSpider(scrapy.Spider):
             yield scrapy.Request(url=get_url(product_url), callback=self.parse_product_page, meta={'asin': asin})
         next_page = response.xpath('//li[@class="a-last"]/a/@href').extract_first()
         page_limit = 0
-        if next_page and page_limit < 4:
+        if next_page and page_limit <= 1:
             url = urljoin("https://www.amazon.com", next_page)
             page_limit += 1
-            yield scrapy.Request(url=get_url(product_url), callback=self.parse_keyword_response)
+            yield scrapy.Request(url=get_url(url), callback=self.parse_keyword_response)
 
     def parse_product_page(self, response):
         asin = response.meta['asin']
