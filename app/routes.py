@@ -1,5 +1,6 @@
 from flask import render_template, flash, redirect, url_for
 from app.forms import ProductSearchForm
+import json
 from app import app
 
 
@@ -16,4 +17,9 @@ def home():
 
 @app.route('/results')
 def results():
-    return render_template('results.html', title='Search Results')
+    with open('./Amazon_Scraper/test_limited_pages.jl', 'r') as jl_file:
+        json_list = list(jl_file)
+    items = []
+    for item in json_list:
+        items.append(json.loads(item))
+    return render_template('results.html', title='Search Results', items=items)
