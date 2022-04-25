@@ -2,11 +2,11 @@ import json
 import re
 from urllib.parse import urljoin, urlencode
 import scrapy
-from ..config import Config
+
+import scraperConfig
 
 
-queries = ['men\'s tshirt']
-API_KEY = Config.API_KEY
+API_KEY = scraperConfig.API_KEY
 
 
 def get_url(url):
@@ -19,9 +19,8 @@ class AmazonSpider(scrapy.Spider):
     name = 'amazon'
 
     def start_requests(self):
-        for query in queries:
-            url = 'https://www.amazon.com/s?' + urlencode({'k': query})
-            yield scrapy.Request(url=get_url(url), callback=self.parse_keyword_responses)
+        url = 'https://www.amazon.com/s?' + urlencode({'k': self.query})    # self.query for passing param in ScrapyRT
+        yield scrapy.Request(url=get_url(url), callback=self.parse_keyword_responses)
 
     def parse_keyword_responses(self, response):
         products = response.xpath('//*[@data-asin]')
@@ -31,10 +30,10 @@ class AmazonSpider(scrapy.Spider):
             yield scrapy.Request(url=get_url(product_url), callback=self.parse_product_page, meta={'asin': asin})
         next_page = response.xpath('//li[@class="a-last"]/a/@href').extract_first()
         page_limit = 0
-        if next_page and page_limit <= 1:
+        if page_limit != 1 and next_page:   # only scrape 1 page if available
             url = urljoin("https://www.amazon.com", next_page)
             page_limit += 1
-            yield scrapy.Request(url=get_url(url), callback=self.parse_keyword_response)
+            yield scrapy.Request(url=get_url(url), callback=self.parse_keyword_responses)
 
     def parse_product_page(self, response):
         asin = response.meta['asin']

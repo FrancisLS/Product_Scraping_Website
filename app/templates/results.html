@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>No search functionality yet :(</h1>
-
     <table class="table table-hover table-light table-striped table-responsive">
         <thead>
             <tr>
@@ -35,4 +33,11 @@
             {% endfor %}
         </tbody>
     </table>
+    <!--
+    <div class=page>
+        {% for table in tables %}
+        {{ table|safe }}
+        {% endfor %}
+    </div>
+    -->
 {% endblock %}
