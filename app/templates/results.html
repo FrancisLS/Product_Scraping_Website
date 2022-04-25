@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <table class="table table-hover table-light table-striped table-responsive">
+<!-- class="table table-hover table-light table-striped table-responsive" -->
+    <table id="table"
+           data-toggle="table"
+           data-reorderable-rows="true"
+           data-search="true"
+           data-show-toggle="true"
+           data-sticky-header="true"
+           data-pagination="true"
+           data-resizable="true">
+        <!--
         <thead>
             <tr>
                 <th scope="col">ASIN</th>
@@ -16,6 +25,20 @@
                 <th scope="col">Seller Rank</th>
             </tr>
         </thead>
+        -->
+        <thead>
+            <tr>
+                <th data-field="ASIN" data-sortable="false">ASIN</th>
+                <th data-field="Title" data-sortable="true">Title</th>
+                <th data-field="Image" data-sortable="false">Image</th>
+                <th data-field="Rating" data-sortable="true">Rating</th>
+                <th data-field="NumOfReviews" data-sortable="true"># of Reviews</th>
+                <th data-field="Price" data-sortable="true">Price</th>
+                <th data-field="Sizes" data-sortable="false">Sizes</th>
+                <th data-field="Colors" data-sortable="false">Colors</th>
+                <th data-field="Details" data-sortable="false">Details</th>
+            </tr>
+        </thead>
         <tbody>
             {% for item in items %}
             <tr>
@@ -28,7 +51,6 @@
                 <td>{{ item.AvailableSizes }}</td>
                 <td>{{ item.AvailableColors }}</td>
                 <td>{{ item.BulletPoints }}</td>
-                <td>{{ item.SellerRank }}</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -18,10 +18,14 @@ class AmazonScraperPipeline:
                 item[k] = v.strip()
             elif k == 'Rating':
                 item[k] = v.replace(' out of 5 stars', '')
+            elif k == 'NumberOfReviews':
+                string = item[k].split()[0]
+                string = string.replace(",", "")
+                item[k] = string
+            elif k == 'Price':
+                item[k] = v.replace('$', '')    # have to remove because of Bootstrap Table reorder feature
             elif k == 'AvailableSizes' or k == 'AvailableColors':
                 item[k] = ", ".join(v)
             elif k == 'BulletPoints':
                 item[k] = ", ".join([i.strip() for i in v if i.strip()])
-            elif k == 'SellerRank':
-                item[k] = " ".join([i.strip() for i in v if i.strip()])
         return item
