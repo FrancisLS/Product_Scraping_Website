@@ -57,5 +57,7 @@ class AmazonSpider(scrapy.Spider):
             sizes = di.get('size_name', [])
             colors = di.get('color_name', [])
         bullet_points = response.xpath('//*[@id="feature-bullets"]//li/span/text()').extract()
-        yield {'asin': asin, 'Title': title, 'MainImage': image, 'Rating': rating, 'NumberOfReviews': number_of_reviews,
-               'Price': price, 'AvailableSizes': sizes, 'AvailableColors': colors, 'BulletPoints': bullet_points}
+        url = 'https://www.amazon.com/dp/' + asin
+        yield {'Title': title, 'MainImage': image, 'Rating': rating, 'NumberOfReviews': number_of_reviews,
+               'Price': price, 'AvailableSizes': sizes, 'AvailableColors': colors, 'BulletPoints': bullet_points,
+               'URL': url}

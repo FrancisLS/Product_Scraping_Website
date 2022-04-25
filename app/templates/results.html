@@ -2,7 +2,8 @@
 
 {% block content %}
 <!-- class="table table-hover table-light table-striped table-responsive" -->
-    <table id="table"
+    <div>
+        <table id="table"
            data-toggle="table"
            data-reorderable-rows="true"
            data-search="true"
@@ -28,7 +29,6 @@
         -->
         <thead>
             <tr>
-                <th data-field="ASIN" data-sortable="false">ASIN</th>
                 <th data-field="Title" data-sortable="true">Title</th>
                 <th data-field="Image" data-sortable="false">Image</th>
                 <th data-field="Rating" data-sortable="true">Rating</th>
@@ -37,12 +37,12 @@
                 <th data-field="Sizes" data-sortable="false">Sizes</th>
                 <th data-field="Colors" data-sortable="false">Colors</th>
                 <th data-field="Details" data-sortable="false">Details</th>
+                <th data-field="URL" data-sortable="false">URL</th>
             </tr>
         </thead>
         <tbody>
             {% for item in items %}
             <tr>
-                <td>{{ item.asin }}</td>
                 <td>{{ item.Title }}</td>
                 <td><img src="{{ item.MainImage }}"></td>
                 <td>{{ item.Rating }}</td>
@@ -51,10 +51,13 @@
                 <td>{{ item.AvailableSizes }}</td>
                 <td>{{ item.AvailableColors }}</td>
                 <td>{{ item.BulletPoints }}</td>
+                <td>{{ item.URL }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    </div>
+
     <!--
     <div class=page>
         {% for table in tables %}
