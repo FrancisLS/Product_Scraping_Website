@@ -8,6 +8,7 @@
            data-reorderable-rows="true"
            data-search="true"
            data-show-toggle="true"
+           data-show-refresh="true"
            data-sticky-header="true"
            data-pagination="true"
            data-resizable="true">
@@ -44,14 +45,14 @@
             {% for item in items %}
             <tr>
                 <td>{{ item.Title }}</td>
-                <td><img src="{{ item.MainImage }}"></td>
+                <td><img src="{{ item.MainImage }}" class="img-fluid"></td>
                 <td>{{ item.Rating }}</td>
                 <td>{{ item.NumberOfReviews }}</td>
                 <td>{{ item.Price }}</td>
                 <td>{{ item.AvailableSizes }}</td>
                 <td>{{ item.AvailableColors }}</td>
                 <td>{{ item.BulletPoints }}</td>
-                <td>{{ item.URL }}</td>
+                <td><a href="{{ item.URL }}">{{ item.URL }}</a></td>
             </tr>
             {% endfor %}
         </tbody>
