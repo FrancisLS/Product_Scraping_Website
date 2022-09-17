@@ -6,7 +6,7 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-
+import math
 
 class AmazonScraperPipeline:
     def process_item(self, item, spider):
@@ -17,11 +17,19 @@ class AmazonScraperPipeline:
             if k == 'Title':
                 item[k] = v.strip()
             elif k == 'Rating':
-                item[k] = v.replace(' out of 5 stars', '')
+                v = v.replace(' out of 5 stars', '')
+                v = v.replace('(', '')  # for Walmart
+                v = v.replace(')', '')  # for Walmart
+                item[k] = v
+            elif k == 'NumberOfReviews':
+                item[k] = v.split()[0]
+                item[k] = item[k].replace(",", "")
+            elif k == 'Price':
+                v = v.replace("$", "")    # have to remove because of Bootstrap Table reorder feature
+                v = v.replace(",", "")      # have to remove because of Bootstrap Table reorder feature
+                item[k] = str(math.ceil(float(v)))  # round up price to remove decimals for BST reorder feature
             elif k == 'AvailableSizes' or k == 'AvailableColors':
                 item[k] = ", ".join(v)
             elif k == 'BulletPoints':
                 item[k] = ", ".join([i.strip() for i in v if i.strip()])
-            elif k == 'SellerRank':
-                item[k] = " ".join([i.strip() for i in v if i.strip()])
         return item

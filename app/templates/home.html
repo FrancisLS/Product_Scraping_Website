@@ -1,16 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Hi, {{user.username}}!</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.product.label }}<br>
-            {{ form.product(size=32) }}<br>
-            {% for error in form.product.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+<!--
+    <div class="container h-100 bg-success p-2 text-dark bg-opacity-10">
+        <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+            <h1 class="col-lg-6 offset-lg-3 justify-content-center">Hi, {{user.username}}!</h1>
+            <form action="" method="post" novalidate class="col-lg-6 offset-lg-3">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.product.label }}<br>
+                    {{ form.product(size=32) }}<br>
+                    {% for error in form.product.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>{{ form.submit() }}</p>
+            </form>
+    </div>
+    </div>
+-->
+    <div id="home">
+        <div class="landing-text">
+            <h1>Hi, {{ user.username }}</h1>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.product.label }}<br>
+                    {{ form.product(size=32) }}<br>
+                    {% for error in form.product.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>{{ form.submit() }}</p>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
