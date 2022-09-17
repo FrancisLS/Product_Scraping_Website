@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!--
+    <table class="table table-hover table-light table-striped table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">ASIN</th>
+                <th scope="col">Title</th>
+                <th scope="col">Image</th>
+                <th scope="col">Rating</th>
+                <th scope="col"># of Reviews</th>
+                <th scope="col">Price</th>
+                <th scope="col">Sizes</th>
+                <th scope="col">Colors</th>
+                <th scope="col">Details</th>
+                <th scope="col">Seller Rank</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.asin }}</td>
+                <td>{{ item.Title }}</td>
+                <td><img src="{{ item.MainImage }}"></td>
+                <td>{{ item.Rating }}</td>
+                <td>{{ item.NumberOfReviews }}</td>
+                <td>{{ item.Price }}</td>
+                <td>{{ item.AvailableSizes }}</td>
+                <td>{{ item.AvailableColors }}</td>
+                <td>{{ item.BulletPoints }}</td>
+                <td>{{ item.SellerRank }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    -->
+    <div id="results">
+        <table id="table"
+           data-toggle="table"
+           data-reorderable-rows="true"
+           data-search="true"
+           data-show-toggle="true"
+           data-show-refresh="false"
+           data-sticky-header="true"
+           data-pagination="true"
+           data-resizable="true">
+            <thead>
+                <tr>
+                    <th data-field="Title" data-sortable="true">Title</th>
+                    <th data-field="Image" data-sortable="false">Image</th>
+                    <th data-field="Rating" data-sortable="true">Rating</th>
+                    <th data-field="NumOfReviews" data-sortable="true"># of Reviews</th>
+                    <th data-field="Price" data-sortable="true">Price</th>
+                    <th data-field="Sizes" data-sortable="false">Sizes</th>
+                    <th data-field="Colors" data-sortable="false">Colors</th>
+                    <th data-field="Details" data-sortable="false">Details</th>
+                    <th data-field="URL" data-sortable="false">URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.Title }}</td>
+                    <td><img src="{{ item.MainImage }}" class="img-fluid"></td>
+                    <td>{{ item.Rating }}</td>
+                    <td>{{ item.NumberOfReviews }}</td>
+                    <td>{{ item.Price }}</td>
+                    <td>{{ item.AvailableSizes }}</td>
+                    <td>{{ item.AvailableColors }}</td>
+                    <td>{{ item.BulletPoints }}</td>
+                    <td><a href="{{ item.URL }}">{{ item.URL }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

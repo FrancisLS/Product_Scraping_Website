@@ -20,6 +20,7 @@ def home():
         flash('Searched for {}.'.format(form.product.data))  # debug msg
         query = form.product.data
         return results(query)
+        #return stubResults(query)
     return render_template('home.html', title='Home', user=user, form=form)
 
 
@@ -41,16 +42,14 @@ def results(query):
     '''
     raw_data = json.loads(response.text)
     items = raw_data['items']
-    return render_template('results.html', title='Search Results', items=items)
+    return render_template('results.html', title=f'Search Results for {query}', items=items)
 
 
-'''
 @app.route('/stubResults')
-def stubResults():
+def stubResults(query):
     with open('./Amazon_Scraper/test_limited_pages.jl', 'r') as jl_file:
         json_list = list(jl_file)
     items = []
     for item in json_list:
         items.append(json.loads(item))
-    return render_template('stubResults.html', title='Search Results', items=items)
-'''
+    return render_template('stubResults.html', title=f'Search Results for {query}', items=items)
